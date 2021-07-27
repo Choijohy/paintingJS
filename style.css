@@ -60,3 +60,11 @@ body{
 .controls .controls__range{
     margin-bottom: 30px;
 }
+.figure__btns{
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.figure__btns input{
+    margin: 10px;
+}
