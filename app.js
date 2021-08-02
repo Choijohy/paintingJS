@@ -158,3 +158,60 @@ if (recBtn){
 if (jsRectDrag){
     jsRectDrag.addEventListener("click",dragRect);
 }
+
+// CatchMind Function
+
+const answerForm = document.querySelector("#answer_form")
+const answerInput = document.querySelector("#answer_form input")
+
+var answer = localStorage.getItem("answer");
+let correct = false;
+
+function changeInput(){
+    answerInput.value="";
+    if (correct==true){
+        answerInput.placeholder = "Draw what you want";
+    }else{
+        answerInput.placeholder = "Enter your answer";
+    }
+    
+}
+
+function answerSave(event){
+    answer = answerInput.value;
+    localStorage.setItem("answer",answer);
+    changeInput();
+}
+
+function answerSubmit(event){
+    var enteredAnswer = answerInput.value;
+    if (enteredAnswer == answer){
+        alert("Correct");
+        localStorage.removeItem("answer");
+        correct =true;
+        changeInput();
+        answer = localStorage.getItem("answer");
+
+    }else{
+        alert("Incorrect. Try Again");
+        changeInput();
+    }
+}
+
+function onSubmitEvent(event){
+    event.preventDefault();
+    if (answer==null){
+        answerSave();
+    }else{
+        answerSubmit();
+    }
+}
+
+answerForm.addEventListener("submit",onSubmitEvent);
+
+if (answer!==null){
+    changeInput();
+}
+
+
+
